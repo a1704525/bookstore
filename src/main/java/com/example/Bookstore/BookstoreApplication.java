@@ -32,6 +32,7 @@ public class BookstoreApplication {
 				
 				brepository.save(new Book ("Harry Potter ja viisasten kivi", "J.K. Rowling", 1997, "978-952-04-0180-1", crepository.findByName("Fiction").get(0)));
 				brepository.save(new Book ("Murhakierre", "John Verdon", 2012, "978-951-20-9668-8", crepository.findByName("Mystery").get(0)));
+				brepository.save(new Book ("tyt", "John", 2012, "978-951-20-9668-8", crepository.findByName("Mystery").get(0)));
 								
 				log.info("fetch all books");
 				for (Book book : brepository.findAll()) {
