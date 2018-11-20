@@ -26,7 +26,7 @@ public class User {
 	    
 	    public User() {
 	    }
-
+	    
 		public User(String username, String passwordHash, String role) {
 			super();
 			this.username = username;

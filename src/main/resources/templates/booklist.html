@@ -6,17 +6,20 @@
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
-	<div class="col-md-4">
+	<div class="col-sm-12 text-left">
 		<h1>Books</h1>
-	</div>
 	
-	<div class="col-md-4">
-		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	
+	<div class="row">
+	<div class="col-sm-6">
+		<h3 class= "text-secondary" th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+		<br>
 	</div>
-	<div class="col-md-4" style="padding:20px 0">
+	<div class="col-sm-6 text-right">
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Sign Out" class="btn btn-danger"/>
 		</form>
+	</div>
 	</div>
     <table class="table table-striped">
 		<tr>
@@ -25,9 +28,8 @@
 		    <th>ISBN</th>
 		    <th>Year</th>
 		    <th>Category</th>
-		    <th></th>
-		    
-		    
+		    <th>
+   			 <th>
 		   
 		</tr>  
     	<tr th:each = "book : ${books}">
@@ -36,11 +38,13 @@
     		<td th:text="${book.isbn}"></td>		
     		<td th:text="${book.year}"></td>
     		<td th:text="${book.category.name}"></td>
-    		
+    		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-warning">Edit</a></td>
  			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>   
  			<td sec:authorize="hasAuthority('USER')"></td> 		
     	</tr>
      </table>
-	 <a class="btn btn-primary" href="/add">Add Book</a>    	
+	 <a class="btn btn-primary" href="/add">Add Book</a>    
+	 
+	 </div>	
 </body>
 </html>

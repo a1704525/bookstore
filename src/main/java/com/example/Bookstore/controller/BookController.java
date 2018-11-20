@@ -59,7 +59,18 @@ public class BookController {
     public String save(Book book){
         repository.save(book);
         return "redirect:booklist";
-    }    
+    }   
+    
+    //Edit book
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @RequestMapping(value = "/edit/{id}")
+    public String editBook(@PathVariable("id") Long bookId, Model model){
+    model.addAttribute("book", repository.findById(bookId));
+    model.addAttribute("categories", crepository.findAll());
+    return "editbook";
+    }
+
+    
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
